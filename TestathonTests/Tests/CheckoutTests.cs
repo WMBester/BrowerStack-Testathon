@@ -15,6 +15,7 @@ namespace TestathonTests.Tests
         private async Task SelectDropdownOption(string containerId, string optionText)
         {
             await Page.Locator($"#{containerId}").ClickAsync();
+            await Page.WaitForSelectorAsync($"#{containerId} [class*='menu']");
             await Page.GetByRole(AriaRole.Option, new() { Name = optionText, Exact = true }).ClickAsync();
         }
 
