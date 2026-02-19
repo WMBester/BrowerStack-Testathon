@@ -35,7 +35,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-PC-001: Add a single product to cart")]
+        [Description("Add a single product to cart")]
         public async Task AddSingleProductToCart()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-184]]");
@@ -51,7 +51,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-PC-002: Add multiple different products to cart")]
+        [Description("Add multiple different products to cart")]
         public async Task AddMultipleDifferentProductsToCart()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-185]]");
@@ -74,7 +74,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-PC-003: Add the same product to cart multiple times")]
+        [Description("Add the same product to cart multiple times")]
         public async Task AddSameProductToCartMultipleTimes()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-186]]");
@@ -93,7 +93,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-PC-004: Add to Favourites from product listing")]
+        [Description("Add to Favourites from product listing")]
         public async Task AddToFavouritesFromProductListing()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-187]]");
@@ -116,7 +116,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-PC-005: Remove a product from favourites")]
+        [Description("Remove a product from favourites")]
         public async Task RemoveProductFromFavourites()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-188]]");

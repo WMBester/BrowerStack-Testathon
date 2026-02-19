@@ -42,7 +42,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-CH-001: Successful checkout with all required fields filled")]
+        [Description("Successful checkout with all required fields filled")]
         public async Task SuccessfulCheckoutWithAllFields()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-196]]");
@@ -63,7 +63,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-CH-002: Checkout blocked when First Name is empty")]
+        [Description("Checkout blocked when First Name is empty")]
         public async Task CheckoutBlockedWhenFirstNameEmpty()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-197]]");
@@ -87,7 +87,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-CH-003: Checkout blocked when Last Name is empty")]
+        [Description("Checkout blocked when Last Name is empty")]
         public async Task CheckoutBlockedWhenLastNameEmpty()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-198]]");
@@ -110,7 +110,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-CH-004: Checkout blocked when Address is empty")]
+        [Description("Checkout blocked when Address is empty")]
         public async Task CheckoutBlockedWhenAddressEmpty()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-199]]");
@@ -133,7 +133,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-CH-005: Checkout blocked when State/Province is empty")]
+        [Description("Checkout blocked when State/Province is empty")]
         public async Task CheckoutBlockedWhenStateEmpty()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-200]]");
@@ -156,7 +156,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-CH-006: Checkout blocked when Postal Code is empty")]
+        [Description("Checkout blocked when Postal Code is empty")]
         public async Task CheckoutBlockedWhenPostalCodeEmpty()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-201]]");
@@ -179,7 +179,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-CH-007: Checkout blocked when all fields are empty")]
+        [Description("Checkout blocked when all fields are empty")]
         public async Task CheckoutBlockedWhenAllFieldsEmpty()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-202]]");
@@ -197,7 +197,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-CH-008: Order summary shows correct items and total")]
+        [Description("Order summary shows correct items and total")]
         public async Task OrderSummaryShowsCorrectItemsAndTotal()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-203]]");
@@ -228,7 +228,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-CH-009: Checkout requires authentication")]
+        [Description("Checkout requires authentication")]
         public async Task CheckoutRequiresAuthentication()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-204]]");
@@ -238,7 +238,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-CH-010: Checkout with empty cart shows empty state or submit unavailable")]
+        [Description("Checkout with empty cart shows empty state or submit unavailable")]
         public async Task CheckoutWithEmptyCartShowsEmptyState()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-205]]");

@@ -28,7 +28,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-FA-001: Favourites page requires authentication")]
+        [Description("Favourites page requires authentication")]
         public async Task FavouritesPageRequiresAuthentication()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-189]]");
@@ -47,7 +47,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-FA-002: fav_user sees pre-seeded favourites")]
+        [Description("fav_user sees pre-seeded favourites")]
         public async Task FavUserSeesPreSeededFavourites()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-190]]");
@@ -71,7 +71,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-FA-003: Empty favourites state for demouser with no items favourited")]
+        [Description("Empty favourites state for demouser with no items favourited")]
         public async Task EmptyFavouritesStateForNewUser()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-191]]");
@@ -89,7 +89,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-FA-004: Add to cart from favourites page")]
+        [Description("Add to cart from favourites page")]
         public async Task AddToCartFromFavouritesPage()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-192]]");

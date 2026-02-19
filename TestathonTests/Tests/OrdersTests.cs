@@ -49,7 +49,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-OR-001: Orders page requires authentication")]
+        [Description("Orders page requires authentication")]
         public async Task OrdersPageRequiresAuthentication()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-211]]");
@@ -66,7 +66,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-OR-002: existing_orders_user sees pre-seeded order history")]
+        [Description("existing_orders_user sees pre-seeded order history")]
         public async Task ExistingOrdersUserSeesOrderHistory()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-212]]");
@@ -103,7 +103,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-OR-003: Orders page shows empty state for user with no orders")]
+        [Description("Orders page shows empty state for user with no orders")]
         public async Task OrdersPageShowsEmptyStateForNewUser()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-213]]");
@@ -120,7 +120,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-OR-004: Order placed via checkout appears in order history")]
+        [Description("Order placed via checkout appears in order history")]
         public async Task NewOrderAppearsInOrderHistory()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-214]]");
@@ -138,7 +138,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-OR-005: Order details display correct product information")]
+        [Description("Order details display correct product information")]
         public async Task OrderDetailsDisplayCorrectProductInformation()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-215]]");

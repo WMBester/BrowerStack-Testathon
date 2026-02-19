@@ -28,7 +28,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-PL-001: Home page loads with product listings")]
+        [Description("Home page loads with product listings")]
         public async Task HomePageLoadsWithProductListings()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-176]]");
@@ -47,7 +47,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-PL-002: Product images load correctly for demouser")]
+        [Description("Product images load correctly for demouser")]
         public async Task ProductImagesLoadForDemouser()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-177]]");
@@ -66,7 +66,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-PL-003: Product images fail to load for image_not_loading_user")]
+        [Description("Product images fail to load for image_not_loading_user")]
         public async Task ProductImagesFailForImageNotLoadingUser()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-178]]");
@@ -89,7 +89,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-PL-004: Filter products by a single category")]
+        [Description("Filter products by a single category")]
         public async Task FilterProductsBySingleCategory()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-179]]");
@@ -119,7 +119,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-PL-005: Filter products by multiple categories simultaneously")]
+        [Description("Filter products by multiple categories simultaneously")]
         public async Task FilterProductsByMultipleCategories()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-180]]");
@@ -141,7 +141,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-PL-006: Sort products by price low to high")]
+        [Description("Sort products by price low to high")]
         // NOTE: This test is ignored because the sort/order control does not exist on the live
         // testathon.live site. No <select>, custom dropdown, or any "Low to High" / "High to Low"
         // UI element was found in the DOM during Playwright exploration (Feb 2026).
@@ -168,7 +168,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-PL-007: Sort products by price high to low")]
+        [Description("Sort products by price high to low")]
         // NOTE: This test is ignored because the sort/order control does not exist on the live
         // testathon.live site. No <select>, custom dropdown, or any "Low to High" / "High to Low"
         // UI element was found in the DOM during Playwright exploration (Feb 2026).
@@ -195,7 +195,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-PL-008: Home page is accessible without authentication")]
+        [Description("Home page is accessible without authentication")]
         public async Task HomePageAccessibleWithoutAuthentication()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-183]]");

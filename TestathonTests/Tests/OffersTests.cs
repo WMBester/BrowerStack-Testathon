@@ -28,7 +28,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-OF-001: Offers page requires authentication")]
+        [Description("Offers page requires authentication")]
         public async Task OffersPageRequiresAuthentication()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-216]]");
@@ -45,7 +45,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-OF-002: Offers page requests geolocation permission")]
+        [Description("Offers page requests geolocation permission")]
         public async Task OffersPageRequestsGeolocationPermission()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-217]]");
@@ -68,7 +68,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-OF-003: Offers display when geolocation is allowed")]
+        [Description("Offers display when geolocation is allowed")]
         public async Task OffersDisplayWhenGeolocationAllowed()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-218]]");
@@ -95,7 +95,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-OF-004: Error message displayed when geolocation is denied")]
+        [Description("Error message displayed when geolocation is denied")]
         public async Task ErrorMessageWhenGeolocationDenied()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-219]]");
@@ -113,7 +113,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-OF-005: No offers available message for current location")]
+        [Description("No offers available message for current location")]
         public async Task NoOffersMessageForLocationWithNoOffers()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-220]]");
@@ -136,7 +136,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-OF-006: Offers page handles browser without geolocation support")]
+        [Description("Offers page handles browser without geolocation support")]
         public async Task OffersPageHandlesBrowserWithoutGeolocationSupport()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-221]]");
@@ -158,7 +158,7 @@ namespace TestathonTests.Tests
         }
 
         [Test]
-        [Description("TC-OF-007: Each offer card displays an image and a title")]
+        [Description("Each offer card displays an image and a title")]
         public async Task EachOfferCardDisplaysImageAndTitle()
         {
             TestContext.WriteLine("[[PROPERTY|id=TC-222]]");
