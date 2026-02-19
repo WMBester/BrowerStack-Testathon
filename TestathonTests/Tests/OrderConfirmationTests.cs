@@ -52,6 +52,7 @@ namespace TestathonTests.Tests
         [Description("TC-CF-001: Confirmation page displays after successful checkout")]
         public async Task ConfirmationPageDisplaysAfterCheckout()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-206]]");
             await SignIn("demouser");
             await CompleteCheckout();
 
@@ -80,6 +81,7 @@ namespace TestathonTests.Tests
         [Description("TC-CF-002: Continue Shopping button returns to home page")]
         public async Task ContinueShoppingButtonReturnsToHome()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-207]]");
             await SignIn("demouser");
             await CompleteCheckout();
 
@@ -97,6 +99,7 @@ namespace TestathonTests.Tests
         [Description("TC-CF-003: Download order receipt generates a PDF download")]
         public async Task DownloadOrderReceiptGeneratesPdf()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-208]]");
             await SignIn("demouser");
             await CompleteCheckout();
 
@@ -124,6 +127,7 @@ namespace TestathonTests.Tests
         [Description("TC-CF-004: Confirmation page cannot be accessed directly without placing an order")]
         public async Task ConfirmationPageCannotBeAccessedDirectly()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-209]]");
             await SignIn("demouser");
 
             // Navigate directly to /confirmation without checking out
@@ -155,6 +159,7 @@ namespace TestathonTests.Tests
         [Description("TC-CF-005: Order number is within valid range (1-100)")]
         public async Task OrderNumberIsWithinValidRange()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-210]]");
             await SignIn("demouser");
             await CompleteCheckout();
 

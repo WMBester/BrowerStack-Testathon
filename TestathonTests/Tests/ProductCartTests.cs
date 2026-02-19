@@ -38,6 +38,7 @@ namespace TestathonTests.Tests
         [Description("TC-PC-001: Add a single product to cart")]
         public async Task AddSingleProductToCart()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-184]]");
             await SignIn("demouser");
 
             var cartBadgeBefore = await Page.Locator(".bag--float-cart-closed .bag__quantity").InnerTextAsync();
@@ -53,6 +54,7 @@ namespace TestathonTests.Tests
         [Description("TC-PC-002: Add multiple different products to cart")]
         public async Task AddMultipleDifferentProductsToCart()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-185]]");
             await SignIn("demouser");
             await Page.WaitForSelectorAsync(".shelf-item__buy-btn");
 
@@ -75,6 +77,7 @@ namespace TestathonTests.Tests
         [Description("TC-PC-003: Add the same product to cart multiple times")]
         public async Task AddSameProductToCartMultipleTimes()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-186]]");
             await SignIn("demouser");
             await Page.WaitForSelectorAsync(".shelf-item__buy-btn");
 
@@ -93,6 +96,7 @@ namespace TestathonTests.Tests
         [Description("TC-PC-004: Add to Favourites from product listing")]
         public async Task AddToFavouritesFromProductListing()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-187]]");
             await SignIn("demouser");
             await Page.WaitForSelectorAsync(".shelf-stopper button");
 
@@ -115,6 +119,7 @@ namespace TestathonTests.Tests
         [Description("TC-PC-005: Remove a product from favourites")]
         public async Task RemoveProductFromFavourites()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-188]]");
             // fav_user has pre-seeded favourites
             await SignIn("fav_user");
             await Page.GotoAsync($"{BaseUrl}/favourites");

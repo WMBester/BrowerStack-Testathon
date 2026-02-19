@@ -51,6 +51,7 @@ namespace TestathonTests.Tests
         [Description("TC-CA-001: Cart persists items when navigating away and back")]
         public async Task CartPersistsItemsAcrossNavigation()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-193]]");
             await SignIn("demouser");
             await AddToCart(0);
 
@@ -73,6 +74,7 @@ namespace TestathonTests.Tests
         [Description("TC-CA-002: Cart is cleared after successful checkout")]
         public async Task CartClearedAfterSuccessfulCheckout()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-194]]");
             await SignIn("demouser");
             await AddToCart(0);
 
@@ -93,6 +95,7 @@ namespace TestathonTests.Tests
         [Description("TC-CA-003: Cart is empty when no items added — checkout shows empty state")]
         public async Task CartEmptyWhenNoItemsAdded()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-195]]");
             await SignIn("demouser");
 
             // Navigate to checkout with an empty cart

@@ -29,6 +29,7 @@ namespace TestathonTests.Tests
         [Description("TC-SI-001: Successful sign in with valid credentials")]
         public async Task SuccessfulSignInWithValidCredentials()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-166]]");
             await Page.GotoAsync($"{BaseUrl}/signin");
 
             await SignIn("demouser");
@@ -41,6 +42,7 @@ namespace TestathonTests.Tests
         [Description("TC-SI-002: Sign in redirects to checkout when coming from cart")]
         public async Task SignInRedirectsToCheckoutFromCart()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-167]]");
             await Page.GotoAsync($"{BaseUrl}/checkout");
 
             await Expect(Page).ToHaveURLAsync(new Regex(@"/signin\?checkout=true"));
@@ -54,6 +56,7 @@ namespace TestathonTests.Tests
         [Description("TC-SI-003: Sign in redirects to favourites when coming from favourites")]
         public async Task SignInRedirectsToFavouritesFromFavourites()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-168]]");
             await Page.GotoAsync($"{BaseUrl}/favourites");
 
             await Expect(Page).ToHaveURLAsync(new Regex(@"/signin\?favourites=true"));
@@ -67,6 +70,7 @@ namespace TestathonTests.Tests
         [Description("TC-SI-004: Sign in redirects to offers when coming from offers")]
         public async Task SignInRedirectsToOffersFromOffers()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-169]]");
             await Page.GotoAsync($"{BaseUrl}/offers");
 
             await Expect(Page).ToHaveURLAsync(new Regex(@"/signin\?offers=true"));
@@ -80,6 +84,7 @@ namespace TestathonTests.Tests
         [Description("TC-SI-005: Locked user cannot sign in")]
         public async Task LockedUserCannotSignIn()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-170]]");
             await Page.GotoAsync($"{BaseUrl}/signin");
 
             await SignIn("locked_user");
@@ -92,6 +97,7 @@ namespace TestathonTests.Tests
         [Description("TC-SI-006: Username dropdown displays all expected options")]
         public async Task UsernameDropdownDisplaysAllExpectedOptions()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-171]]");
             await Page.GotoAsync($"{BaseUrl}/signin");
 
             await Page.Locator("#username").ClickAsync();
@@ -117,6 +123,7 @@ namespace TestathonTests.Tests
         [Description("TC-SI-007: Sign In page does not allow direct text entry in Username")]
         public async Task UsernameFieldDoesNotAllowArbitraryTextEntry()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-172]]");
             await Page.GotoAsync($"{BaseUrl}/signin");
 
             await Page.Locator("#username").ClickAsync();
@@ -134,6 +141,7 @@ namespace TestathonTests.Tests
         [Description("TC-SI-008: Log In button with no credentials selected shows error")]
         public async Task LoginWithNoCredentialsShowsError()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-173]]");
             await Page.GotoAsync($"{BaseUrl}/signin");
 
             await Page.Locator("#login-btn").ClickAsync();
@@ -146,6 +154,7 @@ namespace TestathonTests.Tests
         [Description("TC-SI-009: Sign in with username selected but no password shows error")]
         public async Task LoginWithUsernameButNoPasswordShowsError()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-174]]");
             await Page.GotoAsync($"{BaseUrl}/signin");
 
             await SelectDropdownOption("username", "demouser");
@@ -159,6 +168,7 @@ namespace TestathonTests.Tests
         [Description("TC-SI-010: Sign in page is accessible without authentication and redirects when already logged in")]
         public async Task SignInPageAccessibilityAndRedirectWhenLoggedIn()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-175]]");
             // Not logged in: /signin loads normally
             await Page.GotoAsync($"{BaseUrl}/signin");
             await Expect(Page).ToHaveURLAsync(new Regex(@".*signin"));

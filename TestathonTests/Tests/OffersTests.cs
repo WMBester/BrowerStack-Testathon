@@ -31,6 +31,7 @@ namespace TestathonTests.Tests
         [Description("TC-OF-001: Offers page requires authentication")]
         public async Task OffersPageRequiresAuthentication()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-216]]");
             await Page.GotoAsync($"{BaseUrl}/offers");
 
             await Expect(Page).ToHaveURLAsync(new Regex(@"/signin\?offers=true"));
@@ -47,6 +48,7 @@ namespace TestathonTests.Tests
         [Description("TC-OF-002: Offers page requests geolocation permission")]
         public async Task OffersPageRequestsGeolocationPermission()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-217]]");
             // Use default context (no geolocation permission granted)
             await SignIn("demouser");
             await Page.GotoAsync($"{BaseUrl}/offers");
@@ -69,6 +71,7 @@ namespace TestathonTests.Tests
         [Description("TC-OF-003: Offers display when geolocation is allowed")]
         public async Task OffersDisplayWhenGeolocationAllowed()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-218]]");
             // Grant geolocation permission for this test
             await Context.GrantPermissionsAsync(new[] { "geolocation" });
             await Context.SetGeolocationAsync(new Geolocation { Latitude = 37.7749f, Longitude = -122.4194f });
@@ -95,6 +98,7 @@ namespace TestathonTests.Tests
         [Description("TC-OF-004: Error message displayed when geolocation is denied")]
         public async Task ErrorMessageWhenGeolocationDenied()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-219]]");
             // Default context — geolocation not granted
             await SignIn("demouser");
             await Page.GotoAsync($"{BaseUrl}/offers");
@@ -112,6 +116,7 @@ namespace TestathonTests.Tests
         [Description("TC-OF-005: No offers available message for current location")]
         public async Task NoOffersMessageForLocationWithNoOffers()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-220]]");
             // Use coordinates unlikely to have promotional offers (remote location)
             await Context.GrantPermissionsAsync(new[] { "geolocation" });
             await Context.SetGeolocationAsync(new Geolocation { Latitude = -85.0f, Longitude = 0.0f });
@@ -134,6 +139,7 @@ namespace TestathonTests.Tests
         [Description("TC-OF-006: Offers page handles browser without geolocation support")]
         public async Task OffersPageHandlesBrowserWithoutGeolocationSupport()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-221]]");
             await SignIn("demouser");
 
             // Simulate a browser without geolocation API by overriding navigator.geolocation
@@ -155,6 +161,7 @@ namespace TestathonTests.Tests
         [Description("TC-OF-007: Each offer card displays an image and a title")]
         public async Task EachOfferCardDisplaysImageAndTitle()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-222]]");
             await Context.GrantPermissionsAsync(new[] { "geolocation" });
             await Context.SetGeolocationAsync(new Geolocation { Latitude = 37.7749f, Longitude = -122.4194f });
 

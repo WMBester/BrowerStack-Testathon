@@ -31,6 +31,7 @@ namespace TestathonTests.Tests
         [Description("TC-PL-001: Home page loads with product listings")]
         public async Task HomePageLoadsWithProductListings()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-176]]");
             await SignIn("demouser");
 
             await Page.WaitForSelectorAsync(".shelf-item");
@@ -49,6 +50,7 @@ namespace TestathonTests.Tests
         [Description("TC-PL-002: Product images load correctly for demouser")]
         public async Task ProductImagesLoadForDemouser()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-177]]");
             await SignIn("demouser");
             await Page.WaitForSelectorAsync(".shelf-item__thumb img");
 
@@ -67,6 +69,7 @@ namespace TestathonTests.Tests
         [Description("TC-PL-003: Product images fail to load for image_not_loading_user")]
         public async Task ProductImagesFailForImageNotLoadingUser()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-178]]");
             await SignIn("image_not_loading_user");
             await Page.WaitForSelectorAsync(".shelf-item");
             await Page.WaitForTimeoutAsync(2000);
@@ -89,6 +92,7 @@ namespace TestathonTests.Tests
         [Description("TC-PL-004: Filter products by a single category")]
         public async Task FilterProductsBySingleCategory()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-179]]");
             await SignIn("demouser");
             await Page.WaitForSelectorAsync(".shelf-item");
 
@@ -118,6 +122,7 @@ namespace TestathonTests.Tests
         [Description("TC-PL-005: Filter products by multiple categories simultaneously")]
         public async Task FilterProductsByMultipleCategories()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-180]]");
             await SignIn("demouser");
             await Page.WaitForSelectorAsync(".shelf-item");
 
@@ -144,6 +149,7 @@ namespace TestathonTests.Tests
         [Ignore("Sort control not present on testathon.live - feature not implemented on live site")]
         public async Task SortProductsByPriceLowToHigh()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-181]]");
             await SignIn("demouser");
             await Page.WaitForSelectorAsync(".shelf-item");
 
@@ -170,6 +176,7 @@ namespace TestathonTests.Tests
         [Ignore("Sort control not present on testathon.live - feature not implemented on live site")]
         public async Task SortProductsByPriceHighToLow()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-182]]");
             await SignIn("demouser");
             await Page.WaitForSelectorAsync(".shelf-item");
 
@@ -191,6 +198,7 @@ namespace TestathonTests.Tests
         [Description("TC-PL-008: Home page is accessible without authentication")]
         public async Task HomePageAccessibleWithoutAuthentication()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-183]]");
             await Page.GotoAsync(BaseUrl);
             await Page.WaitForLoadStateAsync(LoadState.NetworkIdle);
 

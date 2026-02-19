@@ -52,6 +52,7 @@ namespace TestathonTests.Tests
         [Description("TC-NA-001: Header navigation links are accessible when signed in")]
         public async Task HeaderNavigationLinksAccessibleWhenSignedIn()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-223]]");
             await SignIn("demouser");
 
             // All nav links should be visible
@@ -76,6 +77,7 @@ namespace TestathonTests.Tests
         [Description("TC-NA-002: Sign out clears session and redirects to sign in")]
         public async Task SignOutClearsSessionAndRedirects()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-224]]");
             await SignIn("demouser");
 
             // Click Logout
@@ -96,6 +98,7 @@ namespace TestathonTests.Tests
         [Description("TC-NA-003: Cart count in header reflects items added and resets after checkout")]
         public async Task CartCountReflectsItemsAddedAndResetsAfterCheckout()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-225]]");
             await SignIn("demouser");
             await Page.WaitForSelectorAsync(".shelf-item__buy-btn");
 
@@ -126,6 +129,7 @@ namespace TestathonTests.Tests
         [Description("TC-NA-004: StackDemo logo navigates to home page")]
         public async Task StackDemoLogoNavigatesToHome()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-226]]");
             await SignIn("demouser");
 
             // Navigate away from home
@@ -142,6 +146,7 @@ namespace TestathonTests.Tests
         [Description("TC-NA-005: Footer is present on all pages")]
         public async Task FooterIsPresentOnAllPages()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-227]]");
             await SignIn("demouser");
 
             // Home page

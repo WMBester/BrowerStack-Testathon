@@ -52,6 +52,7 @@ namespace TestathonTests.Tests
         [Description("TC-OR-001: Orders page requires authentication")]
         public async Task OrdersPageRequiresAuthentication()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-211]]");
             await Page.GotoAsync($"{BaseUrl}/orders");
 
             await Expect(Page).ToHaveURLAsync(new Regex(@"/signin\?orders=true"));
@@ -68,6 +69,7 @@ namespace TestathonTests.Tests
         [Description("TC-OR-002: existing_orders_user sees pre-seeded order history")]
         public async Task ExistingOrdersUserSeesOrderHistory()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-212]]");
             await SignIn("existing_orders_user");
             await Page.GotoAsync($"{BaseUrl}/orders");
             await Page.WaitForLoadStateAsync(LoadState.NetworkIdle);
@@ -104,6 +106,7 @@ namespace TestathonTests.Tests
         [Description("TC-OR-003: Orders page shows empty state for user with no orders")]
         public async Task OrdersPageShowsEmptyStateForNewUser()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-213]]");
             await SignIn("demouser");
             await Page.GotoAsync($"{BaseUrl}/orders");
             await Page.WaitForLoadStateAsync(LoadState.NetworkIdle);
@@ -120,6 +123,7 @@ namespace TestathonTests.Tests
         [Description("TC-OR-004: Order placed via checkout appears in order history")]
         public async Task NewOrderAppearsInOrderHistory()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-214]]");
             await SignIn("demouser");
             await CompleteCheckout();
 
@@ -137,6 +141,7 @@ namespace TestathonTests.Tests
         [Description("TC-OR-005: Order details display correct product information")]
         public async Task OrderDetailsDisplayCorrectProductInformation()
         {
+            TestContext.WriteLine("[[PROPERTY|id=TC-215]]");
             await SignIn("existing_orders_user");
             await Page.GotoAsync($"{BaseUrl}/orders");
             await Page.WaitForLoadStateAsync(LoadState.NetworkIdle);
