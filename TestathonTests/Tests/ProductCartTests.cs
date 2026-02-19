@@ -44,12 +44,12 @@ namespace TestathonTests.Tests
             TestContext.WriteLine("[[PROPERTY|id=TC-184]]");
             await SignIn("demouser");
 
-            var cartBadgeBefore = await Page.Locator(".bag--float-cart-closed .bag__quantity").InnerTextAsync();
+            var cartBadgeBefore = await Page.Locator(".bag__quantity").First.InnerTextAsync();
             Assert.That(cartBadgeBefore, Is.EqualTo("0"), "Cart should be empty before adding");
 
             await AddToCart(0);
 
-            var cartBadgeAfter = await Page.Locator(".bag--float-cart-closed .bag__quantity").InnerTextAsync();
+            var cartBadgeAfter = await Page.Locator(".bag__quantity").First.InnerTextAsync();
             Assert.That(cartBadgeAfter, Is.EqualTo("1"), "Cart count should be 1 after adding one product");
         }
 
@@ -63,12 +63,12 @@ namespace TestathonTests.Tests
 
             // Add first product
             await AddToCart(0);
-            var countAfterFirst = await Page.Locator(".bag--float-cart-closed .bag__quantity").InnerTextAsync();
+            var countAfterFirst = await Page.Locator(".bag__quantity").First.InnerTextAsync();
             Assert.That(countAfterFirst, Is.EqualTo("1"), "Cart should show 1 after first product");
 
             // Add second product
             await AddToCart(1);
-            var countAfterSecond = await Page.Locator(".bag--float-cart-closed .bag__quantity").InnerTextAsync();
+            var countAfterSecond = await Page.Locator(".bag__quantity").First.InnerTextAsync();
             Assert.That(countAfterSecond, Is.EqualTo("2"), "Cart should show 2 after second product");
 
             // Verify both products appear in the float cart
@@ -86,11 +86,11 @@ namespace TestathonTests.Tests
 
             // Add first product twice
             await AddToCart(0);
-            var countAfterFirst = await Page.Locator(".bag--float-cart-closed .bag__quantity").InnerTextAsync();
+            var countAfterFirst = await Page.Locator(".bag__quantity").First.InnerTextAsync();
             Assert.That(int.Parse(countAfterFirst), Is.GreaterThanOrEqualTo(1));
 
             await AddToCart(0);
-            var countAfterSecond = await Page.Locator(".bag--float-cart-closed .bag__quantity").InnerTextAsync();
+            var countAfterSecond = await Page.Locator(".bag__quantity").First.InnerTextAsync();
             Assert.That(int.Parse(countAfterSecond), Is.GreaterThan(int.Parse(countAfterFirst)),
                 "Cart count should increase when same product added again");
         }

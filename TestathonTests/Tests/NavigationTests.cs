@@ -106,17 +106,17 @@ namespace TestathonTests.Tests
             await Page.WaitForSelectorAsync(".shelf-item__buy-btn");
 
             // Initially empty
-            var countBefore = await Page.Locator(".bag--float-cart-closed .bag__quantity").InnerTextAsync();
+            var countBefore = await Page.Locator(".bag__quantity").First.InnerTextAsync();
             Assert.That(countBefore, Is.EqualTo("0"), "Cart should start at 0");
 
             // Add one product
             await AddToCart(0);
-            var countAfterOne = await Page.Locator(".bag--float-cart-closed .bag__quantity").InnerTextAsync();
+            var countAfterOne = await Page.Locator(".bag__quantity").First.InnerTextAsync();
             Assert.That(countAfterOne, Is.EqualTo("1"), "Cart should show 1 after first item");
 
             // Add another product
             await AddToCart(1);
-            var countAfterTwo = await Page.Locator(".bag--float-cart-closed .bag__quantity").InnerTextAsync();
+            var countAfterTwo = await Page.Locator(".bag__quantity").First.InnerTextAsync();
             Assert.That(countAfterTwo, Is.EqualTo("2"), "Cart should show 2 after second item");
 
             // Complete checkout and verify cart resets
@@ -124,7 +124,7 @@ namespace TestathonTests.Tests
             await Page.GotoAsync(BaseUrl);
             await Page.WaitForLoadStateAsync(LoadState.NetworkIdle);
 
-            var countAfterCheckout = await Page.Locator(".bag--float-cart-closed .bag__quantity").InnerTextAsync();
+            var countAfterCheckout = await Page.Locator(".bag__quantity").First.InnerTextAsync();
             Assert.That(countAfterCheckout, Is.EqualTo("0"), "Cart should reset to 0 after checkout");
         }
 

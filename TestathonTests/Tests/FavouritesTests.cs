@@ -100,13 +100,13 @@ namespace TestathonTests.Tests
             await Page.GotoAsync($"{BaseUrl}/favourites");
             await Page.WaitForLoadStateAsync(LoadState.NetworkIdle);
 
-            var cartBefore = await Page.Locator(".bag--float-cart-closed .bag__quantity").InnerTextAsync();
+            var cartBefore = await Page.Locator(".bag__quantity").First.InnerTextAsync();
 
             // Click Add to cart on the first favourited item
             await Page.Locator(".shelf-item__buy-btn").First.ClickAsync();
             await Page.WaitForTimeoutAsync(600);
 
-            var cartAfter = await Page.Locator(".bag--float-cart-closed .bag__quantity").InnerTextAsync();
+            var cartAfter = await Page.Locator(".bag__quantity").First.InnerTextAsync();
             Assert.That(int.Parse(cartAfter), Is.GreaterThan(int.Parse(cartBefore)),
                 "Cart count should increment after adding from favourites");
         }

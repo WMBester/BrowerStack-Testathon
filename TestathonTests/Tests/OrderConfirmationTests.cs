@@ -94,7 +94,7 @@ namespace TestathonTests.Tests
             await Expect(Page).ToHaveURLAsync(new Regex(@"testathon\.live/(\?|$)"));
 
             // Cart should be empty after checkout
-            var cartCount = await Page.Locator(".bag--float-cart-closed .bag__quantity").InnerTextAsync();
+            var cartCount = await Page.Locator(".bag__quantity").First.InnerTextAsync();
             Assert.That(cartCount, Is.EqualTo("0"), "Cart should be empty after completing checkout");
         }
 
