@@ -1,0 +1,20 @@
+userName: ${BROWSERSTACK_USERNAME}
+accessKey: ${BROWSERSTACK_ACCESS_KEY}
+
+projectName: www testathon
+buildName: Testathon Build
+buildIdentifier: "#${BUILD_NUMBER}"
+
+platforms:
+  - os: Windows
+    osVersion: 11
+    browserName: chrome
+    browserVersion: latest
+
+browserstackLocal: false
+
+debug: true
+networkLogs: false
+consoleLogs: errors
+
+framework: playwright

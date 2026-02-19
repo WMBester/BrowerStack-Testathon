@@ -1,0 +1,20 @@
+# Build output
+bin/
+obj/
+
+# NuGet
+*.user
+*.suo
+.vs/
+packages/
+
+# BrowserStack local binary
+dotnet-tools.json
+
+# Rider/VS
+.idea/
+*.DotSettings.user
+
+# OS
+.DS_Store
+Thumbs.db
