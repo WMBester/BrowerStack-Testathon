@@ -16,7 +16,9 @@ namespace TestathonTests.Tests
         {
             await Page.Locator($"#{containerId}").ClickAsync();
             await Page.WaitForSelectorAsync($"#{containerId} [class*='menu']");
-            await Page.GetByRole(AriaRole.Option, new() { Name = optionText, Exact = true }).ClickAsync();
+            await Page.Locator($"div[id*='react-select'][id*='option']")
+                .Filter(new() { HasText = optionText })
+                .First.ClickAsync();
         }
 
         private async Task SignIn(string username)
