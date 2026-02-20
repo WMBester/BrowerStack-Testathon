@@ -23,6 +23,7 @@
 8. [Orders](#8-orders)
 9. [Offers](#9-offers)
 10. [Navigation & Header](#10-navigation--header)
+11. [Exploratory Testing](#11-exploratory-testing)
 
 ---
 
@@ -777,3 +778,150 @@
 ---
 
 *Total test cases: 55*
+
+---
+
+## 11. Exploratory Testing
+
+> **Session date:** 2026-02-20
+> **Method:** Playwright headless automation + manual observation
+> **Scope:** Edge cases, accessibility, data integrity, navigation bugs
+
+---
+
+### TC-EX-001 — "Sign In" nav link has incorrect href (`/offers` instead of `/signin`)
+**Priority:** High
+**Bug:** The "Sign In" link in the header points to `/offers` via its `href` attribute. Because unauthenticated users are redirected from `/offers` to `/signin?offers=true`, the link appears to work, but it sets an unintended `?offers=true` query parameter and causes an unnecessary redirect hop.
+
+| Step | Action | Expected Result |
+|---|---|---|
+| 1 | Open the site as a guest (not signed in) | Home page loads |
+| 2 | Inspect the "Sign In" link in the header | `href` attribute should be `/signin` |
+| 3 | Click the "Sign In" link | User navigates directly to `/signin` (no detour through `/offers`) |
+| 4 | Verify the URL | URL is `/signin` with no `?offers=true` query parameter |
+
+**Actual (Bug):** `href="/offers"` — user is redirected through offers, landing on `/signin?offers=true`.
+
+---
+
+### TC-EX-002 — Logout redirects to home page instead of sign-in page
+**Priority:** Medium
+**Bug:** After clicking Logout, users are redirected to `/` (home) instead of `/signin`, leaving them on a page where they see all product listings but cannot access protected features.
+
+| Step | Action | Expected Result |
+|---|---|---|
+| 1 | Sign in as `demouser` | User is authenticated |
+| 2 | Click **Logout** in the header | User is redirected to `/signin` |
+| 3 | Verify the URL | URL is `/signin` |
+| 4 | Verify session is cleared | Header no longer shows username; sign-in form is displayed |
+
+**Actual (Bug):** Logout redirects to `/` (home page), not `/signin`.
+
+---
+
+### TC-EX-003 — Order history shows incorrect item prices ($10.00 for all items)
+**Priority:** High
+**Bug:** On the `/orders` page for `existing_orders_user`, every individual line item is priced at $10.00 regardless of the actual product price (e.g. iPhone 12 retails at $799 on the home page).
+
+| Step | Action | Expected Result |
+|---|---|---|
+| 1 | Sign in as `existing_orders_user` | Authenticated |
+| 2 | Navigate to `/orders` | Order history is displayed |
+| 3 | Expand an order containing iPhone 12 | Line item for iPhone 12 should show $799.00 |
+| 4 | Check all visible item prices | Each item price matches the corresponding product's actual retail price |
+| 5 | Verify the order total is a sum of item prices × quantities | Total = sum of (price × qty) |
+
+**Actual (Bug):** All item prices show as $10.00. Order total shows $125 which does not correspond to any correct sum.
+
+---
+
+### TC-EX-004 — Favourites heart button has incorrect `aria-label` ("delete")
+**Priority:** Medium
+**Bug:** The heart/favourite icon button on every product card on the home page has `aria-label="delete"`. This is misleading to screen-reader users and represents an accessibility defect.
+
+| Step | Action | Expected Result |
+|---|---|---|
+| 1 | Sign in as `demouser` | Home page loads with product grid |
+| 2 | Inspect the heart icon button on any product card | `aria-label` should be something like "Add to favourites" or "Toggle favourite" |
+| 3 | Verify the button communicates its purpose | The label accurately describes the action |
+
+**Actual (Bug):** `aria-label="delete"` on all product favourite buttons.
+
+---
+
+### TC-EX-005 — Unauthenticated users can add products to cart
+**Priority:** Low
+**Note:** Observe-and-document. This may be intentional (guest cart), but authentication is required at checkout.
+
+| Step | Action | Expected Result |
+|---|---|---|
+| 1 | Open the site without signing in | Home page loads with 25 products |
+| 2 | Click **Add to cart** on any product | Expected: prompt to sign in OR cart increments (if guest cart is supported) |
+| 3 | Verify cart badge increments | Cart badge shows 1 |
+| 4 | Navigate to `/checkout` | User is redirected to `/signin?checkout=true` |
+| 5 | Sign in | User is returned to `/checkout` with cart items still present |
+
+**Actual:** Cart badge increments for guests (float cart opens and shows the item). Navigation to `/checkout` correctly requires authentication. Cart items persist after sign-in.
+
+---
+
+### TC-EX-006 — Checkout form has no custom validation error messages
+**Priority:** Medium
+**Bug:** When submitting the checkout form with empty required fields, only the browser's built-in HTML5 native validation tooltip is shown ("Please fill out this field."). There are no custom styled error messages or highlighted fields in the UI.
+
+| Step | Action | Expected Result |
+|---|---|---|
+| 1 | Sign in and add an item to cart | Item in cart |
+| 2 | Navigate to `/checkout` | Checkout page loads |
+| 3 | Leave all fields empty and click **Submit** | Custom inline error messages appear below each empty required field, styled to match the app design |
+| 4 | Verify error state styling | Required fields are visually highlighted (e.g. red border, error icon) |
+
+**Actual (Bug):** Only browser-native HTML5 validation tooltip appears. No custom error UI elements or field highlighting.
+
+---
+
+### TC-EX-007 — Product listing shows installment pricing alongside main price
+**Priority:** Low
+**Note:** Informational / verify correctness.
+
+| Step | Action | Expected Result |
+|---|---|---|
+| 1 | Sign in and view the home page | Product cards are visible |
+| 2 | For each product, note the main price and the installment price (e.g. "or 9 x $88.78") | Installment calculation should be: main price ÷ number of installments = installment amount |
+| 3 | Verify iPhone 12 ($799.00): 9 × $88.78 = $799.02 | Rounding difference of $0.02 — acceptable OR exact match expected? |
+| 4 | Verify installment counts are consistent (some show 9×, others 5×, 3×) | Document whether different installment terms are intentional per product |
+
+**Actual:** Installment amounts are mathematically correct (within rounding). Installment counts vary per product (3×, 5×, 6×, 7×, 8×, 9×, 12×).
+
+---
+
+### TC-EX-008 — Accessing `/confirmation` directly without an order redirects to home
+**Priority:** Low
+**Preconditions:** User is signed in but has NOT placed an order in the current session
+
+| Step | Action | Expected Result |
+|---|---|---|
+| 1 | Sign in as `demouser` | Authenticated |
+| 2 | Navigate directly to `/confirmation` | Expected: redirect to home OR a clear "No order found" message |
+| 3 | Verify no fake order data is displayed | No order number, no summary, no receipt link |
+
+**Actual:** Redirects to `/` (home page). No fake data is shown — correct behaviour confirmed.
+
+---
+
+### TC-EX-009 — Already authenticated user navigating to `/signin` is redirected to home
+**Priority:** Low
+**Preconditions:** User is already signed in
+
+| Step | Action | Expected Result |
+|---|---|---|
+| 1 | Sign in as `demouser` | URL becomes `/?signin=true` |
+| 2 | Navigate directly to `/signin` | User should be redirected away (e.g. to `/`) since they are already authenticated |
+| 3 | Verify the sign-in form is NOT shown | Home page (or another appropriate page) loads instead |
+
+**Actual:** Correctly redirects to `/` when already signed in. Consistent behaviour confirmed.
+
+---
+
+*Total exploratory test cases: 9 (TC-EX-001 to TC-EX-009)*
+*Confirmed bugs: TC-EX-001, TC-EX-002, TC-EX-003, TC-EX-004, TC-EX-006*
