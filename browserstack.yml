@@ -6,10 +6,34 @@ buildName: Testathon Build
 buildIdentifier: "#${BUILD_NUMBER}"
 
 platforms:
+  # Top 3 desktop browsers by market share
   - os: Windows
     osVersion: 11
     browserName: chrome
     browserVersion: latest
+
+  - os: OS X
+    osVersion: Sequoia
+    browserName: safari
+    browserVersion: latest
+
+  - os: Windows
+    osVersion: 11
+    browserName: edge
+    browserVersion: latest
+
+  # Top 3 mobile devices by market share
+  - deviceName: iPhone 15 Pro
+    osVersion: 17
+    browserName: safari
+
+  - deviceName: Samsung Galaxy S23
+    osVersion: 13.0
+    browserName: chrome
+
+  - deviceName: Google Pixel 8
+    osVersion: 14.0
+    browserName: chrome
 
 browserstackLocal: false
 
