@@ -1,40 +1,5 @@
 const { test, expect } = require('@playwright/test');
-
-async function selectDropdownOption(page, containerId, optionText) {
-  await page.locator(`#${containerId}`).click();
-  await page.waitForSelector(`#${containerId} [class*='menu']`);
-  await page.locator("div[id*='react-select'][id*='option']")
-    .filter({ hasText: optionText })
-    .first()
-    .click();
-}
-
-async function signIn(page, username) {
-  await page.goto('/signin');
-  await selectDropdownOption(page, 'username', username);
-  await selectDropdownOption(page, 'password', 'testingisfun99');
-  await page.locator('#login-btn').click();
-  await expect(page).toHaveURL(/testathon\.live\/(\?|$)/);
-}
-
-async function addToCart(page, productIndex = 0) {
-  await page.waitForSelector('.shelf-item__buy-btn');
-  await page.locator('.shelf-item__buy-btn').nth(productIndex).click();
-  await page.waitForTimeout(600);
-}
-
-async function completeCheckout(page) {
-  await addToCart(page, 0);
-  await page.goto('/checkout');
-  await page.waitForLoadState('networkidle');
-  await page.locator('#firstNameInput').fill('John');
-  await page.locator('#lastNameInput').fill('Doe');
-  await page.locator('#addressLine1Input').fill('123 Main Street');
-  await page.locator('#provinceInput').fill('California');
-  await page.locator('#postCodeInput').fill('90001');
-  await page.locator('#checkout-shipping-continue').click();
-  await expect(page).toHaveURL(/\/confirmation/, { timeout: 15000 });
-}
+const { selectDropdownOption, signIn, completeCheckout } = require('./helpers');
 
 test.describe('Orders Tests', () => {
 

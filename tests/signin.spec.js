@@ -1,26 +1,10 @@
 const { test, expect } = require('@playwright/test');
-
-async function selectDropdownOption(page, containerId, optionText) {
-  await page.locator(`#${containerId}`).click();
-  await page.waitForSelector(`#${containerId} [class*='menu']`);
-  await page.locator("div[id*='react-select'][id*='option']")
-    .filter({ hasText: optionText })
-    .first()
-    .click();
-}
-
-async function signIn(page, username) {
-  await selectDropdownOption(page, 'username', username);
-  await selectDropdownOption(page, 'password', 'testingisfun99');
-  await page.locator('#login-btn').click();
-}
+const { selectDropdownOption, signIn, signInForm } = require('./helpers');
 
 test.describe('Sign In Tests', () => {
 
   test('TC-166 - Successful sign in with valid credentials', async ({ page }) => {
     console.log('[[PROPERTY|id=TC-166]]');
-    await page.goto('/signin');
-
     await signIn(page, 'demouser');
 
     await expect(page).toHaveURL(/testathon\.live\/(\?|$)/);
@@ -33,7 +17,7 @@ test.describe('Sign In Tests', () => {
 
     await expect(page).toHaveURL(/\/signin\?checkout=true/);
 
-    await signIn(page, 'demouser');
+    await signInForm(page, 'demouser');
 
     await expect(page).toHaveURL(/\/checkout/);
   });
@@ -44,7 +28,7 @@ test.describe('Sign In Tests', () => {
 
     await expect(page).toHaveURL(/\/signin\?favourites=true/);
 
-    await signIn(page, 'demouser');
+    await signInForm(page, 'demouser');
 
     await expect(page).toHaveURL(/\/favourites/);
   });
@@ -55,7 +39,7 @@ test.describe('Sign In Tests', () => {
 
     await expect(page).toHaveURL(/\/signin\?offers=true/);
 
-    await signIn(page, 'demouser');
+    await signInForm(page, 'demouser');
 
     await expect(page).toHaveURL(/\/offers/);
   });
@@ -64,7 +48,7 @@ test.describe('Sign In Tests', () => {
     console.log('[[PROPERTY|id=TC-170]]');
     await page.goto('/signin');
 
-    await signIn(page, 'locked_user');
+    await signInForm(page, 'locked_user');
 
     await expect(page.locator('h3.api-error')).toBeVisible();
     await expect(page).toHaveURL(/.*signin/);

@@ -1,21 +1,5 @@
 const { test, expect } = require('@playwright/test');
-
-async function selectDropdownOption(page, containerId, optionText) {
-  await page.locator(`#${containerId}`).click();
-  await page.waitForSelector(`#${containerId} [class*='menu']`);
-  await page.locator("div[id*='react-select'][id*='option']")
-    .filter({ hasText: optionText })
-    .first()
-    .click();
-}
-
-async function signIn(page, username) {
-  await page.goto('/signin');
-  await selectDropdownOption(page, 'username', username);
-  await selectDropdownOption(page, 'password', 'testingisfun99');
-  await page.locator('#login-btn').click();
-  await expect(page).toHaveURL(/testathon\.live\/(\?|$)/);
-}
+const { signIn, signInForm } = require('./helpers');
 
 test.describe('Offers Tests', () => {
 
@@ -25,9 +9,7 @@ test.describe('Offers Tests', () => {
 
     await expect(page).toHaveURL(/\/signin\?offers=true/);
 
-    await selectDropdownOption(page, 'username', 'demouser');
-    await selectDropdownOption(page, 'password', 'testingisfun99');
-    await page.locator('#login-btn').click();
+    await signInForm(page, 'demouser');
 
     await expect(page).toHaveURL(/\/offers/);
   });
@@ -38,14 +20,10 @@ test.describe('Offers Tests', () => {
     await signIn(page, 'demouser');
     await page.goto('/offers');
     await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(2000);
 
-    const pageText = await page.locator('body').innerText();
-    expect(
-      pageText.includes('Please enable Geolocation') ||
-      pageText.includes('promotional offers') ||
-      pageText.includes('Geolocation is not available')
-    ).toBe(true);
+    await expect(page.locator('body')).toContainText(
+      /Please enable Geolocation|promotional offers|Geolocation is not available/
+    );
   });
 
   test('TC-218 - Offers display when geolocation is allowed', async ({ page, context }) => {
@@ -56,7 +34,7 @@ test.describe('Offers Tests', () => {
     await signIn(page, 'demouser');
     await page.goto('/offers');
     await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(3000);
+    await page.locator('div.offer').first().waitFor();
 
     const offerCards = page.locator('div.offer');
     const count = await offerCards.count();
@@ -74,7 +52,6 @@ test.describe('Offers Tests', () => {
     await signIn(page, 'demouser');
     await page.goto('/offers');
     await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(3000);
 
     await expect(page.getByText('Please enable Geolocation in your browser.')).toBeVisible();
 
@@ -91,32 +68,26 @@ test.describe('Offers Tests', () => {
     await signIn(page, 'demouser');
     await page.goto('/offers');
     await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(3000);
 
-    const pageText = await page.locator('body').innerText();
-    expect(
-      pageText.includes('Sorry we do not have any promotional offers in your city') ||
-      pageText.includes('promotional offers in your location')
-    ).toBe(true);
+    await expect(page.locator('body')).toContainText(
+      /Sorry we do not have any promotional offers in your city|promotional offers in your location/
+    );
   });
 
   test('TC-221 - Offers page handles browser without geolocation support', async ({ page }) => {
     console.log('[[PROPERTY|id=TC-221]]');
-    await signIn(page, 'demouser');
-
-    // Simulate a browser without geolocation API
+    // addInitScript must be registered before any navigation so it runs on every page load
     await page.addInitScript(() => {
       Object.defineProperty(navigator, 'geolocation', { get: () => undefined });
     });
+
+    await signIn(page, 'demouser');
     await page.goto('/offers');
     await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(3000);
 
-    const pageText = await page.locator('body').innerText();
-    expect(
-      pageText.includes('Geolocation is not available in your browser') ||
-      pageText.includes('Please enable Geolocation')
-    ).toBe(true);
+    await expect(page.locator('body')).toContainText(
+      /Geolocation is not available in your browser|Please enable Geolocation/
+    );
   });
 
   test('TC-222 - Each offer card displays an image and a title', async ({ page, context }) => {
@@ -127,7 +98,7 @@ test.describe('Offers Tests', () => {
     await signIn(page, 'demouser');
     await page.goto('/offers');
     await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(3000);
+    await page.locator('div.offer').first().waitFor();
 
     const offerCards = page.locator('div.offer');
     const count = await offerCards.count();

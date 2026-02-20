@@ -1,21 +1,5 @@
 const { test, expect } = require('@playwright/test');
-
-async function selectDropdownOption(page, containerId, optionText) {
-  await page.locator(`#${containerId}`).click();
-  await page.waitForSelector(`#${containerId} [class*='menu']`);
-  await page.locator("div[id*='react-select'][id*='option']")
-    .filter({ hasText: optionText })
-    .first()
-    .click();
-}
-
-async function signIn(page, username) {
-  await page.goto('/signin');
-  await selectDropdownOption(page, 'username', username);
-  await selectDropdownOption(page, 'password', 'testingisfun99');
-  await page.locator('#login-btn').click();
-  await expect(page).toHaveURL(/testathon\.live\/(\?|$)/);
-}
+const { signIn } = require('./helpers');
 
 test.describe('Product Listing Tests', () => {
 
@@ -110,12 +94,12 @@ test.describe('Product Listing Tests', () => {
     expect(bothCount).toBeGreaterThan(0);
   });
 
-  test.skip('TC-181 - Sort products by price (low to high)', async ({ page }) => {
+  test.skip('TC-181 - Sort products by price (low to high)', async () => {
     // Sort control not present on testathon.live — feature not implemented on live site
     console.log('[[PROPERTY|id=TC-181]]');
   });
 
-  test.skip('TC-182 - Sort products by price (high to low)', async ({ page }) => {
+  test.skip('TC-182 - Sort products by price (high to low)', async () => {
     // Sort control not present on testathon.live — feature not implemented on live site
     console.log('[[PROPERTY|id=TC-182]]');
   });

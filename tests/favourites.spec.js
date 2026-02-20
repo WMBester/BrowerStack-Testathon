@@ -1,21 +1,5 @@
 const { test, expect } = require('@playwright/test');
-
-async function selectDropdownOption(page, containerId, optionText) {
-  await page.locator(`#${containerId}`).click();
-  await page.waitForSelector(`#${containerId} [class*='menu']`);
-  await page.locator("div[id*='react-select'][id*='option']")
-    .filter({ hasText: optionText })
-    .first()
-    .click();
-}
-
-async function signIn(page, username) {
-  await page.goto('/signin');
-  await selectDropdownOption(page, 'username', username);
-  await selectDropdownOption(page, 'password', 'testingisfun99');
-  await page.locator('#login-btn').click();
-  await expect(page).toHaveURL(/testathon\.live\/(\?|$)/);
-}
+const { selectDropdownOption, signIn } = require('./helpers');
 
 test.describe('Favourites Tests', () => {
 
@@ -53,8 +37,7 @@ test.describe('Favourites Tests', () => {
     await page.goto('/favourites');
     await page.waitForLoadState('networkidle');
 
-    const foundText = await page.locator('small.products-found span').innerText();
-    expect(foundText).toContain('0 Product(s) found');
+    await expect(page.locator('small.products-found span')).toContainText('0 Product(s) found');
 
     const productCount = await page.locator('.shelf-item').count();
     expect(productCount).toBe(0);
@@ -66,11 +49,11 @@ test.describe('Favourites Tests', () => {
     await page.goto('/favourites');
     await page.waitForLoadState('networkidle');
 
-    await page.waitForSelector('.shelf-item__buy-btn');
+    await page.locator('.shelf-item__buy-btn').first().waitFor();
     const cartBefore = parseInt(await page.locator('.bag__quantity').first().innerText());
 
     await page.locator('.shelf-item__buy-btn').first().click();
-    await page.waitForTimeout(600);
+    await expect(page.locator('.bag__quantity').first()).not.toHaveText(String(cartBefore));
 
     const cartAfter = parseInt(await page.locator('.bag__quantity').first().innerText());
     expect(cartAfter).toBeGreaterThan(cartBefore);

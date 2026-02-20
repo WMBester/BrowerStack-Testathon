@@ -1,27 +1,5 @@
 const { test, expect } = require('@playwright/test');
-
-async function selectDropdownOption(page, containerId, optionText) {
-  await page.locator(`#${containerId}`).click();
-  await page.waitForSelector(`#${containerId} [class*='menu']`);
-  await page.locator("div[id*='react-select'][id*='option']")
-    .filter({ hasText: optionText })
-    .first()
-    .click();
-}
-
-async function signIn(page, username) {
-  await page.goto('/signin');
-  await selectDropdownOption(page, 'username', username);
-  await selectDropdownOption(page, 'password', 'testingisfun99');
-  await page.locator('#login-btn').click();
-  await expect(page).toHaveURL(/testathon\.live\/(\?|$)/);
-}
-
-async function addToCart(page, productIndex = 0) {
-  await page.waitForSelector('.shelf-item__buy-btn');
-  await page.locator('.shelf-item__buy-btn').nth(productIndex).click();
-  await page.waitForTimeout(600);
-}
+const { signIn, addToCart } = require('./helpers');
 
 async function goToCheckoutWithItem(page) {
   await addToCart(page, 0);
@@ -63,7 +41,6 @@ test.describe('Checkout Tests', () => {
     await page.locator('#postCodeInput').fill('90001');
 
     await page.locator('#checkout-shipping-continue').click();
-    await page.waitForTimeout(1000);
 
     await expect(page).toHaveURL(/\/checkout/);
     await expect(page.locator('#checkout-shipping-continue')).toBeVisible();
@@ -83,7 +60,6 @@ test.describe('Checkout Tests', () => {
     await page.locator('#postCodeInput').fill('90001');
 
     await page.locator('#checkout-shipping-continue').click();
-    await page.waitForTimeout(1000);
 
     await expect(page).toHaveURL(/\/checkout/);
     await expect(page.locator('#checkout-shipping-continue')).toBeVisible();
@@ -103,7 +79,6 @@ test.describe('Checkout Tests', () => {
     await page.locator('#postCodeInput').fill('90001');
 
     await page.locator('#checkout-shipping-continue').click();
-    await page.waitForTimeout(1000);
 
     await expect(page).toHaveURL(/\/checkout/);
     await expect(page.locator('#checkout-shipping-continue')).toBeVisible();
@@ -123,7 +98,6 @@ test.describe('Checkout Tests', () => {
     await page.locator('#postCodeInput').fill('90001');
 
     await page.locator('#checkout-shipping-continue').click();
-    await page.waitForTimeout(1000);
 
     await expect(page).toHaveURL(/\/checkout/);
     await expect(page.locator('#checkout-shipping-continue')).toBeVisible();
@@ -143,7 +117,6 @@ test.describe('Checkout Tests', () => {
     // Leave Postal Code empty
 
     await page.locator('#checkout-shipping-continue').click();
-    await page.waitForTimeout(1000);
 
     await expect(page).toHaveURL(/\/checkout/);
     await expect(page.locator('#checkout-shipping-continue')).toBeVisible();
@@ -158,7 +131,6 @@ test.describe('Checkout Tests', () => {
 
     // Submit with all fields empty
     await page.locator('#checkout-shipping-continue').click();
-    await page.waitForTimeout(1000);
 
     await expect(page).toHaveURL(/\/checkout/);
     await expect(page.locator('#checkout-shipping-continue')).toBeVisible();
@@ -167,7 +139,7 @@ test.describe('Checkout Tests', () => {
   test('TC-203 - Order summary shows correct items and total', async ({ page }) => {
     console.log('[[PROPERTY|id=TC-203]]');
     await signIn(page, 'demouser');
-    await page.waitForSelector('.shelf-item__buy-btn');
+    await page.locator('.shelf-item__buy-btn').first().waitFor();
 
     // Capture prices of first two products
     const price1Text = await page.locator('.shelf-item__price b').nth(0).innerText();
@@ -184,9 +156,7 @@ test.describe('Checkout Tests', () => {
     const orderItems = page.locator('ul.productList li.productList-item');
     await expect(orderItems).toHaveCount(2);
 
-    const totalText = await page.locator('span.cart-priceItem-value span').innerText();
-    const expectedTotal = price1 + price2;
-    expect(totalText).toContain(expectedTotal.toString());
+    await expect(page.locator('span.cart-priceItem-value span')).toContainText(String(price1 + price2));
   });
 
   test('TC-204 - Checkout requires authentication', async ({ page }) => {
