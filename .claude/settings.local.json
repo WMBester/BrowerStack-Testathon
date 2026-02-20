@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.browserstack.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(npm install)",
+      "Bash(npx playwright install:*)",
+      "Bash(npx playwright test:*)"
+    ]
+  }
+}
