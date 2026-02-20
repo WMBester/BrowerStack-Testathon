@@ -1,7 +1,7 @@
 userName: ${BROWSERSTACK_USERNAME}
 accessKey: ${BROWSERSTACK_ACCESS_KEY}
 
-projectName: www testathon
+projectName: testathon.live
 buildName: Testathon Build
 buildIdentifier: "#${BUILD_NUMBER}"
 
@@ -13,8 +13,19 @@ platforms:
 
 browserstackLocal: false
 
-debug: true
+testObservability: true
+
+debug: false
 networkLogs: false
 consoleLogs: errors
 
-framework: playwright
+testOrchestrationOptions:
+    retryTestsOnFailure:
+        enabled: false
+    abortBuildOnFailure:
+        enabled: false
+    runSmartSelection:
+        enabled: false
+    runPreviouslyFailedFirst: false
+    rerunPreviouslyFailed: false
+    skipFlakyandFailed: false
